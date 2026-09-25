@@ -1,0 +1,2415 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kaviya V | Portfolio</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#07111f;
+    color:white;
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size:40px 40px;
+    pointer-events:none;
+    z-index:-1;
+}
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 7%;
+    background:rgba(5,15,28,.92);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid rgba(100,180,255,.12);
+}
+
+.logo{
+    font-size:23px;
+    font-weight:bold;
+    color:#64b5ff;
+}
+
+nav ul{
+    display:flex;
+    gap:8px;
+    list-style:none;
+    flex-wrap:wrap;
+}
+
+nav button{
+    border:0;
+    background:transparent;
+    color:#cbd5e1;
+    padding:10px 13px;
+    cursor:pointer;
+    border-radius:8px;
+    font-size:14px;
+}
+
+nav button:hover,
+nav button.active{
+    background:#123252;
+    color:#64b5ff;
+}
+
+.container{
+    width:86%;
+    max-width:1100px;
+    margin:auto;
+}
+
+.page{
+    display:none;
+    padding:60px 0;
+}
+
+.page.active{
+    display:block;
+}
+
+/* HOME */
+
+.hero{
+    min-height:calc(100vh - 80px);
+    display:grid;
+    grid-template-columns:1.4fr .8fr;
+    gap:50px;
+    align-items:center;
+}
+
+.hero-tag{
+    display:inline-block;
+    padding:8px 14px;
+    border:1px solid #245b87;
+    border-radius:30px;
+    color:#72c4ff;
+    background:#0b2238;
+    margin-bottom:20px;
+    font-size:14px;
+}
+
+.hero h1{
+    font-size:clamp(45px,7vw,78px);
+    line-height:1;
+    margin-bottom:15px;
+}
+
+.hero h1 span{
+    color:#64b5ff;
+}
+
+.hero h2{
+    font-size:25px;
+    color:#cbd5e1;
+    margin-bottom:20px;
+}
+
+.hero p{
+    color:#9fb0c2;
+    line-height:1.8;
+    max-width:650px;
+    font-size:17px;
+}
+
+.hero-buttons{
+    margin-top:30px;
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+}
+
+.primary-btn,
+.secondary-btn{
+    padding:13px 22px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.primary-btn{
+    background:#1688df;
+    color:white;
+    border:1px solid #1688df;
+}
+
+.secondary-btn{
+    background:#0d1e31;
+    color:#8ecfff;
+    border:1px solid #245b87;
+}
+
+.profile-card{
+    background:linear-gradient(145deg,#102a45,#091727);
+    border:1px solid #214867;
+    border-radius:25px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 25px 70px rgba(0,0,0,.35);
+}
+
+.profile-photo{
+    width:220px;
+    height:220px;
+    object-fit:cover;
+    border-radius:50%;
+    border:4px solid #4eb4ff;
+    background:#0b1929;
+    margin-bottom:20px;
+}
+
+.profile-card h3{
+    font-size:24px;
+}
+
+.profile-card p{
+    margin-top:8px;
+    color:#8ea6bd;
+}
+
+.skills{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:15px;
+    margin-top:45px;
+}
+
+.skill{
+    background:#0d1d2f;
+    border:1px solid #193c59;
+    padding:20px 10px;
+    border-radius:15px;
+    text-align:center;
+    color:#b8dfff;
+}
+
+/* CONTENT */
+
+.section-title{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.section-title h1{
+    font-size:38px;
+    margin-bottom:10px;
+}
+
+.section-title p{
+    color:#8fa5bb;
+}
+
+.card{
+    background:linear-gradient(145deg,#102337,#091727);
+    border:1px solid #21445f;
+    border-radius:18px;
+    padding:28px;
+    margin-bottom:25px;
+}
+
+.card h2{
+    color:#71c5ff;
+    margin-bottom:12px;
+}
+
+.description{
+    color:#b0bfd0;
+    line-height:1.7;
+    margin-bottom:20px;
+}
+
+.media{
+    text-align:center;
+    margin-top:20px;
+}
+
+video{
+    display:block;
+    width:100%;
+    max-width:700px;
+    max-height:400px;
+    margin:0 auto;
+    border-radius:12px;
+    background:#000;
+}
+
+.media img{
+    display:block;
+    max-width:100%;
+    max-height:450px;
+    margin:0 auto;
+    border-radius:12px;
+}
+
+.pdf-box{
+    padding:20px;
+    background:#0a1928;
+    border-radius:12px;
+    border:1px solid #1c405d;
+    max-width:500px;
+    margin:0 auto;
+}
+
+.pdf-box a{
+    color:#72c4ff;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+.controls{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-top:18px;
+}
+
+.controls button,
+.file-label{
+    border:0;
+    padding:9px 14px;
+    border-radius:8px;
+    cursor:pointer;
+    background:#16466c;
+    color:white;
+}
+
+.controls button:hover,
+.file-label:hover{
+    background:#1c6598;
+}
+
+.delete{
+    background:#7b2734 !important;
+}
+
+.edit{
+    background:#176b58 !important;
+}
+
+.owner-only{
+    display:none;
+}
+
+/* LOGIN */
+
+.login-box{
+    width:100%;
+    max-width:430px;
+    margin:70px auto;
+    background:linear-gradient(145deg,#10283f,#081625);
+    border:1px solid #285372;
+    border-radius:20px;
+    padding:35px;
+    box-shadow:0 25px 70px rgba(0,0,0,.4);
+}
+
+.login-box h1{
+    text-align:center;
+    margin-bottom:10px;
+    color:#6cc3ff;
+}
+
+.login-box p{
+    text-align:center;
+    color:#8fa5bb;
+    margin-bottom:25px;
+}
+
+.login-box input{
+    width:100%;
+    padding:13px;
+    margin-bottom:14px;
+    border-radius:9px;
+    border:1px solid #284963;
+    background:#071522;
+    color:white;
+    outline:none;
+}
+
+.login-btn{
+    width:100%;
+    padding:13px;
+    border:0;
+    border-radius:9px;
+    background:#1688df;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.login-message{
+    text-align:center;
+    margin-top:15px;
+    color:#ff8794;
+}
+
+.logout{
+    background:#7b2734 !important;
+    color:white !important;
+}
+
+footer{
+    text-align:center;
+    padding:30px;
+    color:#71869a;
+    border-top:1px solid #142c40;
+    margin-top:50px;
+}
+
+@media(max-width:850px){
+
+    .hero{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+
+    .hero p{
+        margin:auto;
+    }
+
+    .hero-buttons{
+        justify-content:center;
+    }
+
+    .skills{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    nav{
+        flex-direction:column;
+        gap:12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+
+    <div class="logo">
+        Kaviya V | B.Tech IT 2nd Year
+    </div>
+
+    <ul>
+
+        <li>
+            <button onclick="showPage('home')">
+                Home
+            </button>
+        </li>
+
+        <li>
+            <button onclick="showPage('communication')">
+                Communication Skills
+            </button>
+        </li>
+
+        <li>
+            <button onclick="showPage('podcast')">
+                Podcast
+            </button>
+        </li>
+
+        <li>
+            <button onclick="showPage('listening')">
+                Listening Skills
+            </button>
+        </li>
+
+        <li>
+            <button onclick="showPage('group')">
+                Group Discussion
+            </button>
+        </li>
+
+        <li>
+            <button onclick="showPage('resume')">
+                Video Resume
+            </button>
+        </li>
+
+        <li>
+            <button onclick="showPage('mock')">
+                Mock Interview
+            </button>
+        </li>
+
+        <li>
+            <button onclick="showPage('login')" id="loginNav">
+                Owner Login
+            </button>
+        </li>
+
+        <li>
+            <button
+                onclick="logout()"
+                class="logout owner-only"
+                id="logoutNav">
+                Logout
+            </button>
+        </li>
+
+    </ul>
+</nav>
+
+
+<!-- HOME -->
+
+<section id="home" class="page active">
+
+<div class="container">
+
+    <div class="hero">
+
+        <div>
+
+            <div class="hero-tag">
+                Available for Learning &amp; Opportunities
+            </div>
+
+            <h1>
+                Hi, I'm <span>Kaviya V.</span>
+            </h1>
+
+            <h2>
+                Information Technology Student
+            </h2>
+
+            <p>
+                I'm a 2nd Year Information Technology student at
+                Ramco Institute of Technology, passionate about
+                software development, web development and creating
+                practical solutions through technology.
+            </p>
+
+            <div class="hero-buttons">
+
+                <button
+                    class="primary-btn"
+                    onclick="showPage('communication')">
+                    Explore My Work
+                </button>
+
+                <button
+                    class="secondary-btn"
+                    onclick="showPage('login')">
+                    Owner Login
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="profile-card">
+
+            <img
+                id="profileImage"
+                class="profile-photo"
+                alt="Kaviya Profile Photo">
+
+            <h3>
+                Kaviya V.
+            </h3>
+
+            <p>
+                2nd Year • Information Technology
+            </p>
+
+            <div
+                class="controls owner-only"
+                id="profileControls">
+
+                <label class="file-label">
+
+                    Upload / Replace
+
+                    <input
+                        type="file"
+                        accept="image/*"
+                        onchange="uploadProfile(event)"
+                        hidden>
+
+                </label>
+
+                <button
+                    class="delete"
+                    onclick="deleteProfile()">
+
+                    Delete
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="skills">
+
+        <div class="skill">
+            🐍 Python
+        </div>
+
+        <div class="skill">
+            ⚙️ C++
+        </div>
+
+        <div class="skill">
+            🗄️ SQL
+        </div>
+
+        <div class="skill">
+            🌐 Web Development
+        </div>
+
+        <div class="skill">
+            🤖 Machine Learning
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- COMMUNICATION -->
+
+<section id="communication" class="page">
+
+<div class="container">
+
+<div class="section-title">
+
+    <h1>
+        Communication Skills
+    </h1>
+
+    <p>
+        Improve communication through speaking and presentation activities.
+    </p>
+
+</div>
+
+
+<div class="card">
+
+    <h2 id="communicationTitle">
+        Statori Talk
+    </h2>
+
+    <p
+        id="communicationDescription"
+        class="description">
+
+        A speaking activity to improve confidence,
+        fluency and communication skills.
+
+    </p>
+
+
+    <div class="owner-only controls">
+
+        <button
+            class="edit"
+            onclick="editText(
+                'communicationTitle',
+                'Enter heading:'
+            )">
+
+            Edit Heading
+
+        </button>
+
+
+        <button
+            class="edit"
+            onclick="editText(
+                'communicationDescription',
+                'Enter description:'
+            )">
+
+            Edit Description
+
+        </button>
+
+
+        <label class="file-label">
+
+            🎥 Video Upload
+
+            <input
+                type="file"
+                accept="video/*"
+                onchange="uploadMedia(
+                    event,
+                    'communication'
+                )"
+                hidden>
+
+        </label>
+
+    </div>
+
+
+    <div
+        id="communicationMedia"
+        class="media">
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PODCAST -->
+
+<section id="podcast" class="page">
+
+<div class="container">
+
+<div class="section-title">
+
+    <h1>
+        Podcast
+    </h1>
+
+    <p>
+        Podcast activity and speaking practice.
+    </p>
+
+</div>
+
+
+<div class="card">
+
+    <h2 id="podcastTitle">
+        Podcast
+    </h2>
+
+    <p
+        id="podcastDescription"
+        class="description">
+
+        A podcast activity designed to develop
+        speaking and presentation skills.
+
+    </p>
+
+
+    <div class="owner-only controls">
+
+        <button
+            class="edit"
+            onclick="editText(
+                'podcastTitle',
+                'Enter heading:'
+            )">
+
+            Edit Heading
+
+        </button>
+
+
+        <button
+            class="edit"
+            onclick="editText(
+                'podcastDescription',
+                'Enter description:'
+            )">
+
+            Edit Description
+
+        </button>
+
+
+        <label class="file-label">
+
+            🎥 Video Upload
+
+            <input
+                type="file"
+                accept="video/*"
+                onchange="uploadMedia(
+                    event,
+                    'podcast'
+                )"
+                hidden>
+
+        </label>
+
+    </div>
+
+
+    <div
+        id="podcastMedia"
+        class="media">
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- LISTENING -->
+
+<section id="listening" class="page">
+
+<div class="container">
+
+<div class="section-title">
+
+    <h1>
+        Listening Skills
+    </h1>
+
+    <p>
+        Listening activity and learning resources.
+    </p>
+
+</div>
+
+
+<div class="card">
+
+    <h2 id="listeningTitle">
+        Listening Skills
+    </h2>
+
+    <p
+        id="listeningDescription"
+        class="description">
+
+        Listening practice material to improve
+        understanding and communication.
+
+    </p>
+
+
+    <div class="owner-only controls">
+
+        <button
+            class="edit"
+            onclick="editText(
+                'listeningTitle',
+                'Enter heading:'
+            )">
+
+            Edit Heading
+
+        </button>
+
+
+        <button
+            class="edit"
+            onclick="editText(
+                'listeningDescription',
+                'Enter description:'
+            )">
+
+            Edit Description
+
+        </button>
+
+
+        <label class="file-label">
+
+            📄 PDF Upload
+
+            <input
+                type="file"
+                accept=".pdf,application/pdf"
+                onchange="uploadMedia(
+                    event,
+                    'listening'
+                )"
+                hidden>
+
+        </label>
+
+    </div>
+
+
+    <div
+        id="listeningMedia"
+        class="media">
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- GROUP DISCUSSION -->
+
+<section id="group" class="page">
+
+<div class="container">
+
+<div class="section-title">
+
+    <h1>
+        Group Discussion
+    </h1>
+
+    <p>
+        Discussion topics, photos and videos.
+    </p>
+
+</div>
+
+
+<div class="card">
+
+    <h2 id="groupTitle">
+        Group Discussion
+    </h2>
+
+    <p
+        id="groupDescription"
+        class="description">
+
+        Group discussion activities that improve
+        confidence, teamwork and idea sharing.
+
+    </p>
+
+
+    <div class="owner-only controls">
+
+        <button
+            class="edit"
+            onclick="editText(
+                'groupTitle',
+                'Enter heading:'
+            )">
+
+            Edit Heading
+
+        </button>
+
+
+        <button
+            class="edit"
+            onclick="editText(
+                'groupDescription',
+                'Enter description:'
+            )">
+
+            Edit Description
+
+        </button>
+
+
+        <label class="file-label">
+
+            📷 Photo Upload
+
+            <input
+                type="file"
+                accept="image/*"
+                onchange="uploadMedia(
+                    event,
+                    'groupPhoto'
+                )"
+                hidden>
+
+        </label>
+
+
+        <label class="file-label">
+
+            🎥 Video Upload
+
+            <input
+                type="file"
+                accept="video/*"
+                onchange="uploadMedia(
+                    event,
+                    'groupVideo'
+                )"
+                hidden>
+
+        </label>
+
+    </div>
+
+
+    <div
+        id="groupPhotoMedia"
+        class="media">
+    </div>
+
+
+    <div
+        id="groupVideoMedia"
+        class="media">
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- VIDEO RESUME -->
+
+<section id="resume" class="page">
+
+<div class="container">
+
+<div class="section-title">
+
+    <h1>
+        Video Resume
+    </h1>
+
+    <p>
+        My professional video resume.
+    </p>
+
+</div>
+
+
+<div class="card">
+
+    <h2 id="resumeTitle">
+        Video Resume
+    </h2>
+
+    <p
+        id="resumeDescription"
+        class="description">
+
+        A video introduction highlighting my
+        skills, education and career goals.
+
+    </p>
+
+
+    <div class="owner-only controls">
+
+        <button
+            class="edit"
+            onclick="editText(
+                'resumeTitle',
+                'Enter heading:'
+            )">
+
+            Edit Heading
+
+        </button>
+
+
+        <button
+            class="edit"
+            onclick="editText(
+                'resumeDescription',
+                'Enter description:'
+            )">
+
+            Edit Description
+
+        </button>
+
+
+        <label class="file-label">
+
+            🎥 Video Upload
+
+            <input
+                type="file"
+                accept="video/*"
+                onchange="uploadMedia(
+                    event,
+                    'resume'
+                )"
+                hidden>
+
+        </label>
+
+    </div>
+
+
+    <div
+        id="resumeMedia"
+        class="media">
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- MOCK INTERVIEW -->
+
+<section id="mock" class="page">
+
+<div class="container">
+
+<div class="section-title">
+
+    <h1>
+        Mock Interview
+    </h1>
+
+    <p>
+        Interview practice and presentation.
+    </p>
+
+</div>
+
+
+<div class="card">
+
+    <h2 id="mockTitle">
+        Mock Interview
+    </h2>
+
+    <p
+        id="mockDescription"
+        class="description">
+
+        Mock interview practice to improve
+        confidence and professional communication.
+
+    </p>
+
+
+    <div class="owner-only controls">
+
+        <button
+            class="edit"
+            onclick="editText(
+                'mockTitle',
+                'Enter heading:'
+            )">
+
+            Edit Heading
+
+        </button>
+
+
+        <button
+            class="edit"
+            onclick="editText(
+                'mockDescription',
+                'Enter description:'
+            )">
+
+            Edit Description
+
+        </button>
+
+
+        <label class="file-label">
+
+            🎥 Video Upload
+
+            <input
+                type="file"
+                accept="video/*"
+                onchange="uploadMedia(
+                    event,
+                    'mock'
+                )"
+                hidden>
+
+        </label>
+
+    </div>
+
+
+    <div
+        id="mockMedia"
+        class="media">
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- OWNER LOGIN -->
+
+<section id="login" class="page">
+
+<div class="container">
+
+<div class="login-box">
+
+    <h1>
+        Owner Login
+    </h1>
+
+    <p>
+        Sign in as the portfolio owner to edit content.
+    </p>
+
+
+    <input
+        id="ownerEmail"
+        type="email"
+        placeholder="Owner Email">
+
+
+    <input
+        id="ownerPassword"
+        type="password"
+        placeholder="Password">
+
+
+    <button
+        class="login-btn"
+        onclick="ownerLogin()">
+
+        Sign In
+
+    </button>
+
+
+    <div
+        id="loginMessage"
+        class="login-message">
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<footer>
+    © 2026 Kaviya V. | Information Technology Student
+</footer>
+
+
+<script>
+
+/* =====================================================
+   OWNER LOGIN
+===================================================== */
+
+const OWNER_EMAIL =
+    "kaviyavelmurugan2008@gmail.com";
+
+/*
+   LOCAL TESTING ONLY.
+
+   Put your own password between the quotes.
+
+   Do NOT publish a real password inside frontend code
+   when the website is public.
+*/
+
+const OWNER_PASSWORD =
+    "kaviya";
+
+
+let isOwner =
+    localStorage.getItem("portfolioOwner") === "true";
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function showPage(id){
+
+    document.querySelectorAll(".page")
+        .forEach(page => {
+            page.classList.remove("active");
+        });
+
+    const page =
+        document.getElementById(id);
+
+    if(page){
+        page.classList.add("active");
+    }
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+/* =====================================================
+   OWNER UI
+===================================================== */
+
+function updateOwnerUI(){
+
+    document.querySelectorAll(".owner-only")
+        .forEach(el => {
+
+            el.style.display =
+                isOwner ? "flex" : "none";
+
+        });
+
+
+    document.getElementById("logoutNav")
+        .style.display =
+        isOwner ? "block" : "none";
+
+
+    document.getElementById("loginNav")
+        .style.display =
+        isOwner ? "none" : "block";
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+function ownerLogin(){
+
+    const email =
+        document
+        .getElementById("ownerEmail")
+        .value
+        .trim();
+
+    const password =
+        document
+        .getElementById("ownerPassword")
+        .value;
+
+    const message =
+        document.getElementById("loginMessage");
+
+
+    if(!email || !password){
+
+        message.style.color =
+            "#ff8794";
+
+        message.textContent =
+            "Please enter email and password.";
+
+        return;
+    }
+
+
+    if(
+        email === OWNER_EMAIL &&
+        password === OWNER_PASSWORD
+    ){
+
+        isOwner = true;
+
+        localStorage.setItem(
+            "portfolioOwner",
+            "true"
+        );
+
+
+        message.style.color =
+            "#62e6b0";
+
+        message.textContent =
+            "Login successful.";
+
+
+        updateOwnerUI();
+
+
+        /*
+           Reload media so owner controls
+           appear immediately after login.
+        */
+
+        loadAllMedia();
+        loadProfile();
+
+
+        setTimeout(() => {
+            showPage("home");
+        },700);
+
+    }else{
+
+        message.style.color =
+            "#ff8794";
+
+        message.textContent =
+            "Invalid owner email or password.";
+
+    }
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function logout(){
+
+    isOwner = false;
+
+    localStorage.removeItem(
+        "portfolioOwner"
+    );
+
+    updateOwnerUI();
+
+    showPage("home");
+}
+
+
+/* =====================================================
+   TEXT EDIT
+===================================================== */
+
+function editText(id,message){
+
+    if(!isOwner){
+
+        alert("Owner login required.");
+
+        return;
+    }
+
+
+    const element =
+        document.getElementById(id);
+
+
+    const newText =
+        prompt(
+            message,
+            element.textContent.trim()
+        );
+
+
+    if(
+        newText !== null &&
+        newText.trim() !== ""
+    ){
+
+        element.textContent =
+            newText.trim();
+
+
+        localStorage.setItem(
+            id,
+            newText.trim()
+        );
+    }
+}
+
+
+/* =====================================================
+   LOAD TEXT
+===================================================== */
+
+[
+    "communicationTitle",
+    "communicationDescription",
+    "podcastTitle",
+    "podcastDescription",
+    "listeningTitle",
+    "listeningDescription",
+    "groupTitle",
+    "groupDescription",
+    "resumeTitle",
+    "resumeDescription",
+    "mockTitle",
+    "mockDescription"
+
+].forEach(id => {
+
+    const saved =
+        localStorage.getItem(id);
+
+    if(saved){
+
+        const element =
+            document.getElementById(id);
+
+        if(element){
+            element.textContent =
+                saved;
+        }
+    }
+
+});
+
+
+/* =====================================================
+   INDEXED DB
+===================================================== */
+
+let db;
+
+
+/*
+   Version 2 is used for the corrected
+   upload structure.
+
+   Existing data is NOT deleted.
+*/
+
+const request =
+    indexedDB.open(
+        "KaviyaPortfolioDB",
+        2
+    );
+
+
+request.onupgradeneeded =
+function(event){
+
+    db =
+        event.target.result;
+
+
+    if(
+        !db.objectStoreNames
+        .contains("media")
+    ){
+
+        db.createObjectStore("media");
+
+    }
+};
+
+
+request.onsuccess =
+function(event){
+
+    db =
+        event.target.result;
+
+
+    loadAllMedia();
+
+    loadProfile();
+
+    updateOwnerUI();
+
+};
+
+
+request.onerror =
+function(){
+
+    console.log(
+        "IndexedDB could not be opened."
+    );
+
+    alert(
+        "Browser storage could not be opened."
+    );
+};
+
+
+/* =====================================================
+   UPLOAD MEDIA
+===================================================== */
+
+function uploadMedia(event,key){
+
+    if(!isOwner){
+
+        alert(
+            "Owner login required."
+        );
+
+        event.target.value = "";
+
+        return;
+    }
+
+
+    const file =
+        event.target.files[0];
+
+
+    if(!file){
+        return;
+    }
+
+
+    if(!db){
+
+        alert(
+            "Storage is not ready. Please wait a moment and try again."
+        );
+
+        return;
+    }
+
+
+    /*
+       Convert file to ArrayBuffer and store it
+       as a Blob. This makes video/image/PDF
+       handling more reliable in IndexedDB.
+    */
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload =
+    function(){
+
+        const blob =
+            new Blob(
+                [reader.result],
+                {
+                    type:
+                        file.type ||
+                        "application/octet-stream"
+                }
+            );
+
+
+        const data = {
+
+            blob:blob,
+
+            type:
+                file.type ||
+                "application/octet-stream",
+
+            name:
+                file.name
+
+        };
+
+
+        const transaction =
+            db.transaction(
+                ["media"],
+                "readwrite"
+            );
+
+
+        const store =
+            transaction.objectStore(
+                "media"
+            );
+
+
+        const saveRequest =
+            store.put(
+                data,
+                key
+            );
+
+
+        saveRequest.onsuccess =
+        function(){
+
+            displayMedia(
+                key,
+                data
+            );
+
+
+            event.target.value =
+                "";
+
+
+            alert(
+                "Upload successful!"
+            );
+
+        };
+
+
+        saveRequest.onerror =
+        function(){
+
+            alert(
+                "Upload failed. Please try again."
+            );
+
+        };
+
+    };
+
+
+    reader.onerror =
+    function(){
+
+        alert(
+            "Could not read the selected file."
+        );
+
+    };
+
+
+    reader.readAsArrayBuffer(file);
+}
+
+
+/* =====================================================
+   DISPLAY MEDIA
+===================================================== */
+
+function displayMedia(key,data){
+
+    const container =
+        document.getElementById(
+            key + "Media"
+        );
+
+
+    if(!container){
+
+        console.log(
+            "Container not found:",
+            key + "Media"
+        );
+
+        return;
+    }
+
+
+    container.innerHTML = "";
+
+
+    if(!data){
+        return;
+    }
+
+
+    /*
+       New uploads use data.blob.
+
+       Old uploads may use data.file.
+       This keeps previous local uploads
+       working when possible.
+    */
+
+    let fileBlob =
+        data.blob || data.file;
+
+
+    if(!fileBlob){
+
+        console.log(
+            "No file data:",
+            key
+        );
+
+        return;
+    }
+
+
+    const url =
+        URL.createObjectURL(
+            fileBlob
+        );
+
+
+    /* VIDEO */
+
+    if(
+        data.type &&
+        data.type.startsWith("video/")
+    ){
+
+        const video =
+            document.createElement("video");
+
+
+        video.controls = true;
+
+        video.preload =
+            "metadata";
+
+        video.src = url;
+
+        video.style.display =
+            "block";
+
+        video.style.margin =
+            "0 auto";
+
+        video.style.width =
+            "100%";
+
+        video.style.maxWidth =
+            "700px";
+
+        video.style.maxHeight =
+            "400px";
+
+
+        container.appendChild(
+            video
+        );
+
+    }
+
+
+    /* IMAGE */
+
+    else if(
+        data.type &&
+        data.type.startsWith("image/")
+    ){
+
+        const img =
+            document.createElement("img");
+
+
+        img.src = url;
+
+        img.alt =
+            data.name ||
+            "Uploaded Image";
+
+
+        img.style.display =
+            "block";
+
+        img.style.margin =
+            "0 auto";
+
+        img.style.maxWidth =
+            "100%";
+
+        img.style.maxHeight =
+            "450px";
+
+        img.style.borderRadius =
+            "12px";
+
+
+        container.appendChild(
+            img
+        );
+
+    }
+
+
+    /* PDF */
+
+    else if(
+        data.type ===
+        "application/pdf"
+    ){
+
+        const box =
+            document.createElement("div");
+
+
+        box.className =
+            "pdf-box";
+
+
+        box.innerHTML =
+            "📄 " +
+            (data.name ||
+            "Uploaded PDF") +
+            "<br><br>";
+
+
+        const link =
+            document.createElement("a");
+
+
+        link.href = url;
+
+        link.target = "_blank";
+
+        link.rel = "noopener";
+
+        link.textContent =
+            "Open PDF";
+
+
+        box.appendChild(
+            link
+        );
+
+
+        container.appendChild(
+            box
+        );
+
+    }
+
+
+    /* OTHER FILE */
+
+    else{
+
+        const message =
+            document.createElement("p");
+
+
+        message.textContent =
+            "Uploaded file: " +
+            (data.name ||
+            "File");
+
+
+        message.style.color =
+            "#72c4ff";
+
+
+        container.appendChild(
+            message
+        );
+
+    }
+
+
+    /* OWNER CONTROLS */
+
+    if(isOwner){
+
+        const controls =
+            document.createElement("div");
+
+
+        controls.className =
+            "controls";
+
+
+        controls.style.display =
+            "flex";
+
+
+        controls.style.justifyContent =
+            "center";
+
+
+        /* REPLACE */
+
+        const replaceLabel =
+            document.createElement("label");
+
+
+        replaceLabel.className =
+            "file-label";
+
+
+        replaceLabel.textContent =
+            "Replace";
+
+
+        const replaceInput =
+            document.createElement("input");
+
+
+        replaceInput.type =
+            "file";
+
+
+        replaceInput.hidden =
+            true;
+
+
+        if(
+            data.type &&
+            data.type.startsWith("video/")
+        ){
+
+            replaceInput.accept =
+                "video/*";
+
+        }
+        else if(
+            data.type &&
+            data.type.startsWith("image/")
+        ){
+
+            replaceInput.accept =
+                "image/*";
+
+        }
+        else{
+
+            replaceInput.accept =
+                ".pdf,application/pdf";
+
+        }
+
+
+        replaceInput.onchange =
+        function(event){
+
+            uploadMedia(
+                event,
+                key
+            );
+
+        };
+
+
+        replaceLabel.appendChild(
+            replaceInput
+        );
+
+
+        /* DELETE */
+
+        const deleteButton =
+            document.createElement(
+                "button"
+            );
+
+
+        deleteButton.className =
+            "delete";
+
+
+        deleteButton.textContent =
+            "Delete";
+
+
+        deleteButton.onclick =
+        function(){
+
+            deleteMedia(key);
+
+        };
+
+
+        controls.appendChild(
+            replaceLabel
+        );
+
+
+        controls.appendChild(
+            deleteButton
+        );
+
+
+        container.appendChild(
+            controls
+        );
+
+    }
+}
+
+
+/* =====================================================
+   DELETE MEDIA
+===================================================== */
+
+function deleteMedia(key){
+
+    if(!isOwner){
+
+        alert(
+            "Owner login required."
+        );
+
+        return;
+    }
+
+
+    if(
+        !confirm(
+            "Delete this file?"
+        )
+    ){
+
+        return;
+    }
+
+
+    const transaction =
+        db.transaction(
+            ["media"],
+            "readwrite"
+        );
+
+
+    const store =
+        transaction.objectStore(
+            "media"
+        );
+
+
+    const request =
+        store.delete(key);
+
+
+    request.onsuccess =
+    function(){
+
+        const container =
+            document.getElementById(
+                key + "Media"
+            );
+
+
+        if(container){
+
+            container.innerHTML =
+                "";
+
+        }
+
+    };
+
+
+    request.onerror =
+    function(){
+
+        alert(
+            "Could not delete the file."
+        );
+
+    };
+}
+
+
+/* =====================================================
+   LOAD ALL MEDIA
+===================================================== */
+
+function loadAllMedia(){
+
+    if(!db){
+        return;
+    }
+
+
+    const keys = [
+
+        "communication",
+        "podcast",
+        "listening",
+        "groupPhoto",
+        "groupVideo",
+        "resume",
+        "mock"
+
+    ];
+
+
+    keys.forEach(
+    function(key){
+
+        const transaction =
+            db.transaction(
+                ["media"],
+                "readonly"
+            );
+
+
+        const store =
+            transaction.objectStore(
+                "media"
+            );
+
+
+        const request =
+            store.get(key);
+
+
+        request.onsuccess =
+        function(){
+
+            const data =
+                request.result;
+
+
+            if(data){
+
+                displayMedia(
+                    key,
+                    data
+                );
+
+            }
+
+        };
+
+
+        request.onerror =
+        function(){
+
+            console.log(
+                "Could not load:",
+                key
+            );
+
+        };
+
+    });
+}
+
+
+/* =====================================================
+   PROFILE PHOTO UPLOAD
+===================================================== */
+
+function uploadProfile(event){
+
+    if(!isOwner){
+
+        alert(
+            "Owner login required."
+        );
+
+        return;
+    }
+
+
+    const file =
+        event.target.files[0];
+
+
+    if(!file){
+        return;
+    }
+
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload =
+    function(){
+
+        const blob =
+            new Blob(
+                [reader.result],
+                {
+                    type:
+                        file.type ||
+                        "image/*"
+                }
+            );
+
+
+        const data = {
+
+            blob:blob,
+
+            type:
+                file.type ||
+                "image/*",
+
+            name:
+                file.name
+
+        };
+
+
+        const transaction =
+            db.transaction(
+                ["media"],
+                "readwrite"
+            );
+
+
+        const store =
+            transaction.objectStore(
+                "media"
+            );
+
+
+        const request =
+            store.put(
+                data,
+                "profile"
+            );
+
+
+        request.onsuccess =
+        function(){
+
+            document.getElementById(
+                "profileImage"
+            ).src =
+                URL.createObjectURL(
+                    blob
+                );
+
+
+            event.target.value =
+                "";
+
+
+            alert(
+                "Profile photo updated."
+            );
+
+        };
+
+    };
+
+
+    reader.readAsArrayBuffer(
+        file
+    );
+}
+
+
+/* =====================================================
+   LOAD PROFILE
+===================================================== */
+
+function loadProfile(){
+
+    if(!db){
+        return;
+    }
+
+
+    const transaction =
+        db.transaction(
+            ["media"],
+            "readonly"
+        );
+
+
+    const store =
+        transaction.objectStore(
+            "media"
+        );
+
+
+    const request =
+        store.get("profile");
+
+
+    request.onsuccess =
+    function(){
+
+        if(request.result){
+
+            const data =
+                request.result;
+
+
+            const fileBlob =
+                data.blob ||
+                data.file;
+
+
+            if(fileBlob){
+
+                document.getElementById(
+                    "profileImage"
+                ).src =
+                    URL.createObjectURL(
+                        fileBlob
+                    );
+
+            }
+
+        }
+
+    };
+}
+
+
+/* =====================================================
+   DELETE PROFILE
+===================================================== */
+
+function deleteProfile(){
+
+    if(!isOwner){
+
+        alert(
+            "Owner login required."
+        );
+
+        return;
+    }
+
+
+    if(
+        !confirm(
+            "Delete profile photo?"
+        )
+    ){
+
+        return;
+    }
+
+
+    const transaction =
+        db.transaction(
+            ["media"],
+            "readwrite"
+        );
+
+
+    const request =
+        transaction.objectStore(
+            "media"
+        ).delete(
+            "profile"
+        );
+
+
+    request.onsuccess =
+    function(){
+
+        document.getElementById(
+            "profileImage"
+        ).removeAttribute(
+            "src"
+        );
+
+    };
+}
+
+
+/* =====================================================
+   STARTUP
+===================================================== */
+
+updateOwnerUI();
+
+</script>
+
+</body>
+</html>
+
