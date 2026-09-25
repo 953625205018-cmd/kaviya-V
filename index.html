@@ -1,10 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kaviya V | Portfolio</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 *{
@@ -69,8 +70,7 @@ nav button{
     font-size:14px;
 }
 
-nav button:hover,
-nav button.active{
+nav button:hover{
     background:#123252;
     color:#64b5ff;
 }
@@ -89,8 +89,6 @@ nav button.active{
 .page.active{
     display:block;
 }
-
-/* HOME */
 
 .hero{
     min-height:calc(100vh - 80px);
@@ -205,8 +203,6 @@ nav button.active{
     color:#b8dfff;
 }
 
-/* CONTENT */
-
 .section-title{
     text-align:center;
     margin-bottom:35px;
@@ -313,8 +309,6 @@ video{
     display:none;
 }
 
-/* LOGIN */
-
 .login-box{
     width:100%;
     max-width:430px;
@@ -379,6 +373,12 @@ footer{
     margin-top:50px;
 }
 
+.status{
+    text-align:center;
+    margin-top:15px;
+    color:#62e6b0;
+}
+
 @media(max-width:850px){
 
     .hero{
@@ -410,70 +410,54 @@ footer{
 
 <nav>
 
-    <div class="logo">
-        Kaviya V | B.Tech IT 2nd Year
-    </div>
+<div class="logo">
+Kaviya V | B.Tech IT 2nd Year
+</div>
 
-    <ul>
+<ul>
 
-        <li>
-            <button onclick="showPage('home')">
-                Home
-            </button>
-        </li>
+<li><button onclick="showPage('home')">Home</button></li>
 
-        <li>
-            <button onclick="showPage('communication')">
-                Communication Skills
-            </button>
-        </li>
+<li><button onclick="showPage('communication')">
+Communication Skills
+</button></li>
 
-        <li>
-            <button onclick="showPage('podcast')">
-                Podcast
-            </button>
-        </li>
+<li><button onclick="showPage('podcast')">
+Podcast
+</button></li>
 
-        <li>
-            <button onclick="showPage('listening')">
-                Listening Skills
-            </button>
-        </li>
+<li><button onclick="showPage('listening')">
+Listening Skills
+</button></li>
 
-        <li>
-            <button onclick="showPage('group')">
-                Group Discussion
-            </button>
-        </li>
+<li><button onclick="showPage('group')">
+Group Discussion
+</button></li>
 
-        <li>
-            <button onclick="showPage('resume')">
-                Video Resume
-            </button>
-        </li>
+<li><button onclick="showPage('resume')">
+Video Resume
+</button></li>
 
-        <li>
-            <button onclick="showPage('mock')">
-                Mock Interview
-            </button>
-        </li>
+<li><button onclick="showPage('mock')">
+Mock Interview
+</button></li>
 
-        <li>
-            <button onclick="showPage('login')" id="loginNav">
-                Owner Login
-            </button>
-        </li>
+<li>
+<button onclick="showPage('login')" id="loginNav">
+Owner Login
+</button>
+</li>
 
-        <li>
-            <button
-                onclick="logout()"
-                class="logout owner-only"
-                id="logoutNav">
-                Logout
-            </button>
-        </li>
+<li>
+<button
+onclick="logout()"
+class="logout owner-only"
+id="logoutNav">
+Logout
+</button>
+</li>
 
-    </ul>
+</ul>
 </nav>
 
 
@@ -483,117 +467,95 @@ footer{
 
 <div class="container">
 
-    <div class="hero">
+<div class="hero">
 
-        <div>
+<div>
 
-            <div class="hero-tag">
-                Available for Learning &amp; Opportunities
-            </div>
+<div class="hero-tag">
+Available for Learning &amp; Opportunities
+</div>
 
-            <h1>
-                Hi, I'm <span>Kaviya V.</span>
-            </h1>
+<h1>
+Hi, I'm <span>Kaviya V.</span>
+</h1>
 
-            <h2>
-                Information Technology Student
-            </h2>
+<h2>
+Information Technology Student
+</h2>
 
-            <p>
-                I'm a 2nd Year Information Technology student at
-                Ramco Institute of Technology, passionate about
-                software development, web development and creating
-                practical solutions through technology.
-            </p>
+<p>
+I'm a 2nd Year Information Technology student at
+Ramco Institute of Technology, passionate about
+software development, web development and creating
+practical solutions through technology.
+</p>
 
-            <div class="hero-buttons">
+<div class="hero-buttons">
 
-                <button
-                    class="primary-btn"
-                    onclick="showPage('communication')">
-                    Explore My Work
-                </button>
+<button
+class="primary-btn"
+onclick="showPage('communication')">
+Explore My Work
+</button>
 
-                <button
-                    class="secondary-btn"
-                    onclick="showPage('login')">
-                    Owner Login
-                </button>
+<button
+class="secondary-btn"
+onclick="showPage('login')">
+Owner Login
+</button>
 
-            </div>
+</div>
 
-        </div>
+</div>
 
+<div class="profile-card">
 
-        <div class="profile-card">
+<img
+id="profileImage"
+class="profile-photo"
+alt="Kaviya Profile Photo">
 
-            <img
-                id="profileImage"
-                class="profile-photo"
-                alt="Kaviya Profile Photo">
+<h3>Kaviya V.</h3>
 
-            <h3>
-                Kaviya V.
-            </h3>
+<p>2nd Year • Information Technology</p>
 
-            <p>
-                2nd Year • Information Technology
-            </p>
+<div
+class="controls owner-only"
+id="profileControls">
 
-            <div
-                class="controls owner-only"
-                id="profileControls">
+<label class="file-label">
 
-                <label class="file-label">
+Upload / Replace
 
-                    Upload / Replace
+<input
+type="file"
+accept="image/*"
+onchange="uploadProfile(event)"
+hidden>
 
-                    <input
-                        type="file"
-                        accept="image/*"
-                        onchange="uploadProfile(event)"
-                        hidden>
+</label>
 
-                </label>
+<button
+class="delete"
+onclick="deleteProfile()">
+Delete
+</button>
 
-                <button
-                    class="delete"
-                    onclick="deleteProfile()">
+</div>
 
-                    Delete
+</div>
 
-                </button>
+</div>
 
-            </div>
+<div class="skills">
 
-        </div>
+<div class="skill">🐍 Python</div>
+<div class="skill">⚙️ C++</div>
+<div class="skill">🗄️ SQL</div>
+<div class="skill">🌐 Web Development</div>
+<div class="skill">🤖 Machine Learning</div>
 
-    </div>
-
-
-    <div class="skills">
-
-        <div class="skill">
-            🐍 Python
-        </div>
-
-        <div class="skill">
-            ⚙️ C++
-        </div>
-
-        <div class="skill">
-            🗄️ SQL
-        </div>
-
-        <div class="skill">
-            🌐 Web Development
-        </div>
-
-        <div class="skill">
-            🤖 Machine Learning
-        </div>
-
-    </div>
+</div>
 
 </div>
 
@@ -608,84 +570,69 @@ footer{
 
 <div class="section-title">
 
-    <h1>
-        Communication Skills
-    </h1>
+<h1>Communication Skills</h1>
 
-    <p>
-        Improve communication through speaking and presentation activities.
-    </p>
+<p>
+Improve communication through speaking and presentation activities.
+</p>
 
 </div>
-
 
 <div class="card">
 
-    <h2 id="communicationTitle">
-        Statori Talk
-    </h2>
+<h2 id="communicationTitle">
+Statori Talk
+</h2>
 
-    <p
-        id="communicationDescription"
-        class="description">
+<p
+id="communicationDescription"
+class="description">
 
-        A speaking activity to improve confidence,
-        fluency and communication skills.
+A speaking activity to improve confidence,
+fluency and communication skills.
 
-    </p>
+</p>
 
+<div class="owner-only controls">
 
-    <div class="owner-only controls">
+<button
+class="edit"
+onclick="editText(
+'communicationTitle',
+'Enter heading:'
+)">
+Edit Heading
+</button>
 
-        <button
-            class="edit"
-            onclick="editText(
-                'communicationTitle',
-                'Enter heading:'
-            )">
+<button
+class="edit"
+onclick="editText(
+'communicationDescription',
+'Enter description:'
+)">
+Edit Description
+</button>
 
-            Edit Heading
+<label class="file-label">
 
-        </button>
+🎥 Video Upload
 
+<input
+type="file"
+accept="video/*"
+onchange="uploadMedia(event,'communication')"
+hidden>
 
-        <button
-            class="edit"
-            onclick="editText(
-                'communicationDescription',
-                'Enter description:'
-            )">
-
-            Edit Description
-
-        </button>
-
-
-        <label class="file-label">
-
-            🎥 Video Upload
-
-            <input
-                type="file"
-                accept="video/*"
-                onchange="uploadMedia(
-                    event,
-                    'communication'
-                )"
-                hidden>
-
-        </label>
-
-    </div>
-
-
-    <div
-        id="communicationMedia"
-        class="media">
-    </div>
+</label>
 
 </div>
 
+<div
+id="communicationMedia"
+class="media">
+</div>
+
+</div>
 </div>
 
 </section>
@@ -699,84 +646,69 @@ footer{
 
 <div class="section-title">
 
-    <h1>
-        Podcast
-    </h1>
+<h1>Podcast</h1>
 
-    <p>
-        Podcast activity and speaking practice.
-    </p>
+<p>
+Podcast activity and speaking practice.
+</p>
 
 </div>
-
 
 <div class="card">
 
-    <h2 id="podcastTitle">
-        Podcast
-    </h2>
+<h2 id="podcastTitle">
+Podcast
+</h2>
 
-    <p
-        id="podcastDescription"
-        class="description">
+<p
+id="podcastDescription"
+class="description">
 
-        A podcast activity designed to develop
-        speaking and presentation skills.
+A podcast activity designed to develop
+speaking and presentation skills.
 
-    </p>
+</p>
 
+<div class="owner-only controls">
 
-    <div class="owner-only controls">
+<button
+class="edit"
+onclick="editText(
+'podcastTitle',
+'Enter heading:'
+)">
+Edit Heading
+</button>
 
-        <button
-            class="edit"
-            onclick="editText(
-                'podcastTitle',
-                'Enter heading:'
-            )">
+<button
+class="edit"
+onclick="editText(
+'podcastDescription',
+'Enter description:'
+)">
+Edit Description
+</button>
 
-            Edit Heading
+<label class="file-label">
 
-        </button>
+🎥 Video Upload
 
+<input
+type="file"
+accept="video/*"
+onchange="uploadMedia(event,'podcast')"
+hidden>
 
-        <button
-            class="edit"
-            onclick="editText(
-                'podcastDescription',
-                'Enter description:'
-            )">
-
-            Edit Description
-
-        </button>
-
-
-        <label class="file-label">
-
-            🎥 Video Upload
-
-            <input
-                type="file"
-                accept="video/*"
-                onchange="uploadMedia(
-                    event,
-                    'podcast'
-                )"
-                hidden>
-
-        </label>
-
-    </div>
-
-
-    <div
-        id="podcastMedia"
-        class="media">
-    </div>
+</label>
 
 </div>
 
+<div
+id="podcastMedia"
+class="media">
+</div>
+
+</div>
 </div>
 
 </section>
@@ -790,84 +722,69 @@ footer{
 
 <div class="section-title">
 
-    <h1>
-        Listening Skills
-    </h1>
+<h1>Listening Skills</h1>
 
-    <p>
-        Listening activity and learning resources.
-    </p>
+<p>
+Listening activity and learning resources.
+</p>
 
 </div>
-
 
 <div class="card">
 
-    <h2 id="listeningTitle">
-        Listening Skills
-    </h2>
+<h2 id="listeningTitle">
+Listening Skills
+</h2>
 
-    <p
-        id="listeningDescription"
-        class="description">
+<p
+id="listeningDescription"
+class="description">
 
-        Listening practice material to improve
-        understanding and communication.
+Listening practice material to improve
+understanding and communication.
 
-    </p>
+</p>
 
+<div class="owner-only controls">
 
-    <div class="owner-only controls">
+<button
+class="edit"
+onclick="editText(
+'listeningTitle',
+'Enter heading:'
+)">
+Edit Heading
+</button>
 
-        <button
-            class="edit"
-            onclick="editText(
-                'listeningTitle',
-                'Enter heading:'
-            )">
+<button
+class="edit"
+onclick="editText(
+'listeningDescription',
+'Enter description:'
+)">
+Edit Description
+</button>
 
-            Edit Heading
+<label class="file-label">
 
-        </button>
+📄 PDF Upload
 
+<input
+type="file"
+accept=".pdf,application/pdf"
+onchange="uploadMedia(event,'listening')"
+hidden>
 
-        <button
-            class="edit"
-            onclick="editText(
-                'listeningDescription',
-                'Enter description:'
-            )">
-
-            Edit Description
-
-        </button>
-
-
-        <label class="file-label">
-
-            📄 PDF Upload
-
-            <input
-                type="file"
-                accept=".pdf,application/pdf"
-                onchange="uploadMedia(
-                    event,
-                    'listening'
-                )"
-                hidden>
-
-        </label>
-
-    </div>
-
-
-    <div
-        id="listeningMedia"
-        class="media">
-    </div>
+</label>
 
 </div>
 
+<div
+id="listeningMedia"
+class="media">
+</div>
+
+</div>
 </div>
 
 </section>
@@ -881,106 +798,86 @@ footer{
 
 <div class="section-title">
 
-    <h1>
-        Group Discussion
-    </h1>
+<h1>Group Discussion</h1>
 
-    <p>
-        Discussion topics, photos and videos.
-    </p>
+<p>
+Discussion topics, photos and videos.
+</p>
 
 </div>
-
 
 <div class="card">
 
-    <h2 id="groupTitle">
-        Group Discussion
-    </h2>
+<h2 id="groupTitle">
+Group Discussion
+</h2>
 
-    <p
-        id="groupDescription"
-        class="description">
+<p
+id="groupDescription"
+class="description">
 
-        Group discussion activities that improve
-        confidence, teamwork and idea sharing.
+Group discussion activities that improve
+confidence, teamwork and idea sharing.
 
-    </p>
+</p>
 
+<div class="owner-only controls">
 
-    <div class="owner-only controls">
+<button
+class="edit"
+onclick="editText(
+'groupTitle',
+'Enter heading:'
+)">
+Edit Heading
+</button>
 
-        <button
-            class="edit"
-            onclick="editText(
-                'groupTitle',
-                'Enter heading:'
-            )">
+<button
+class="edit"
+onclick="editText(
+'groupDescription',
+'Enter description:'
+)">
+Edit Description
+</button>
 
-            Edit Heading
+<label class="file-label">
 
-        </button>
+📷 Photo Upload
 
+<input
+type="file"
+accept="image/*"
+onchange="uploadMedia(event,'groupPhoto')"
+hidden>
 
-        <button
-            class="edit"
-            onclick="editText(
-                'groupDescription',
-                'Enter description:'
-            )">
+</label>
 
-            Edit Description
+<label class="file-label">
 
-        </button>
+🎥 Video Upload
 
+<input
+type="file"
+accept="video/*"
+onchange="uploadMedia(event,'groupVideo')"
+hidden>
 
-        <label class="file-label">
-
-            📷 Photo Upload
-
-            <input
-                type="file"
-                accept="image/*"
-                onchange="uploadMedia(
-                    event,
-                    'groupPhoto'
-                )"
-                hidden>
-
-        </label>
-
-
-        <label class="file-label">
-
-            🎥 Video Upload
-
-            <input
-                type="file"
-                accept="video/*"
-                onchange="uploadMedia(
-                    event,
-                    'groupVideo'
-                )"
-                hidden>
-
-        </label>
-
-    </div>
-
-
-    <div
-        id="groupPhotoMedia"
-        class="media">
-    </div>
-
-
-    <div
-        id="groupVideoMedia"
-        class="media">
-    </div>
+</label>
 
 </div>
 
+<div
+id="groupPhotoMedia"
+class="media">
+</div>
+
+<div
+id="groupVideoMedia"
+class="media">
+</div>
+
+</div>
 </div>
 
 </section>
@@ -994,84 +891,69 @@ footer{
 
 <div class="section-title">
 
-    <h1>
-        Video Resume
-    </h1>
+<h1>Video Resume</h1>
 
-    <p>
-        My professional video resume.
-    </p>
+<p>
+My professional video resume.
+</p>
 
 </div>
-
 
 <div class="card">
 
-    <h2 id="resumeTitle">
-        Video Resume
-    </h2>
+<h2 id="resumeTitle">
+Video Resume
+</h2>
 
-    <p
-        id="resumeDescription"
-        class="description">
+<p
+id="resumeDescription"
+class="description">
 
-        A video introduction highlighting my
-        skills, education and career goals.
+A video introduction highlighting my
+skills, education and career goals.
 
-    </p>
+</p>
 
+<div class="owner-only controls">
 
-    <div class="owner-only controls">
+<button
+class="edit"
+onclick="editText(
+'resumeTitle',
+'Enter heading:'
+)">
+Edit Heading
+</button>
 
-        <button
-            class="edit"
-            onclick="editText(
-                'resumeTitle',
-                'Enter heading:'
-            )">
+<button
+class="edit"
+onclick="editText(
+'resumeDescription',
+'Enter description:'
+)">
+Edit Description
+</button>
 
-            Edit Heading
+<label class="file-label">
 
-        </button>
+🎥 Video Upload
 
+<input
+type="file"
+accept="video/*"
+onchange="uploadMedia(event,'resume')"
+hidden>
 
-        <button
-            class="edit"
-            onclick="editText(
-                'resumeDescription',
-                'Enter description:'
-            )">
-
-            Edit Description
-
-        </button>
-
-
-        <label class="file-label">
-
-            🎥 Video Upload
-
-            <input
-                type="file"
-                accept="video/*"
-                onchange="uploadMedia(
-                    event,
-                    'resume'
-                )"
-                hidden>
-
-        </label>
-
-    </div>
-
-
-    <div
-        id="resumeMedia"
-        class="media">
-    </div>
+</label>
 
 </div>
 
+<div
+id="resumeMedia"
+class="media">
+</div>
+
+</div>
 </div>
 
 </section>
@@ -1085,90 +967,75 @@ footer{
 
 <div class="section-title">
 
-    <h1>
-        Mock Interview
-    </h1>
+<h1>Mock Interview</h1>
 
-    <p>
-        Interview practice and presentation.
-    </p>
+<p>
+Interview practice and presentation.
+</p>
 
 </div>
-
 
 <div class="card">
 
-    <h2 id="mockTitle">
-        Mock Interview
-    </h2>
+<h2 id="mockTitle">
+Mock Interview
+</h2>
 
-    <p
-        id="mockDescription"
-        class="description">
+<p
+id="mockDescription"
+class="description">
 
-        Mock interview practice to improve
-        confidence and professional communication.
+Mock interview practice to improve
+confidence and professional communication.
 
-    </p>
+</p>
 
+<div class="owner-only controls">
 
-    <div class="owner-only controls">
+<button
+class="edit"
+onclick="editText(
+'mockTitle',
+'Enter heading:'
+)">
+Edit Heading
+</button>
 
-        <button
-            class="edit"
-            onclick="editText(
-                'mockTitle',
-                'Enter heading:'
-            )">
+<button
+class="edit"
+onclick="editText(
+'mockDescription',
+'Enter description:'
+)">
+Edit Description
+</button>
 
-            Edit Heading
+<label class="file-label">
 
-        </button>
+🎥 Video Upload
 
+<input
+type="file"
+accept="video/*"
+onchange="uploadMedia(event,'mock')"
+hidden>
 
-        <button
-            class="edit"
-            onclick="editText(
-                'mockDescription',
-                'Enter description:'
-            )">
-
-            Edit Description
-
-        </button>
-
-
-        <label class="file-label">
-
-            🎥 Video Upload
-
-            <input
-                type="file"
-                accept="video/*"
-                onchange="uploadMedia(
-                    event,
-                    'mock'
-                )"
-                hidden>
-
-        </label>
-
-    </div>
-
-
-    <div
-        id="mockMedia"
-        class="media">
-    </div>
+</label>
 
 </div>
 
+<div
+id="mockMedia"
+class="media">
+</div>
+
+</div>
 </div>
 
 </section>
 
 
-<!-- OWNER LOGIN -->
+<!-- LOGIN -->
 
 <section id="login" class="page">
 
@@ -1176,40 +1043,32 @@ footer{
 
 <div class="login-box">
 
-    <h1>
-        Owner Login
-    </h1>
+<h1>Owner Login</h1>
 
-    <p>
-        Sign in as the portfolio owner to edit content.
-    </p>
+<p>
+Sign in as the portfolio owner to edit content.
+</p>
 
+<input
+id="ownerEmail"
+type="email"
+placeholder="Owner Email">
 
-    <input
-        id="ownerEmail"
-        type="email"
-        placeholder="Owner Email">
+<input
+id="ownerPassword"
+type="password"
+placeholder="Password">
 
+<button
+class="login-btn"
+onclick="ownerLogin()">
+Sign In
+</button>
 
-    <input
-        id="ownerPassword"
-        type="password"
-        placeholder="Password">
-
-
-    <button
-        class="login-btn"
-        onclick="ownerLogin()">
-
-        Sign In
-
-    </button>
-
-
-    <div
-        id="loginMessage"
-        class="login-message">
-    </div>
+<div
+id="loginMessage"
+class="login-message">
+</div>
 
 </div>
 
@@ -1219,11 +1078,31 @@ footer{
 
 
 <footer>
-    © 2026 Kaviya V. | Information Technology Student
+© 2026 Kaviya V. | Information Technology Student
 </footer>
 
 
 <script>
+
+/* =====================================================
+   SUPABASE CONFIGURATION
+===================================================== */
+
+const SUPABASE_URL =
+    "https://vhiidkdsslilgvwwcbww.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_eLXhd2mBRdBGaYbfQFr81A_kfd3gUMe";
+
+const STORAGE_BUCKET =
+    "portfolio-media";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
 
 /* =====================================================
    OWNER LOGIN
@@ -1232,18 +1111,8 @@ footer{
 const OWNER_EMAIL =
     "kaviyavelmurugan2008@gmail.com";
 
-/*
-   LOCAL TESTING ONLY.
-
-   Put your own password between the quotes.
-
-   Do NOT publish a real password inside frontend code
-   when the website is public.
-*/
-
 const OWNER_PASSWORD =
     "kaviya";
-
 
 let isOwner =
     localStorage.getItem("portfolioOwner") === "true";
@@ -1256,9 +1125,9 @@ let isOwner =
 function showPage(id){
 
     document.querySelectorAll(".page")
-        .forEach(page => {
-            page.classList.remove("active");
-        });
+    .forEach(page => {
+        page.classList.remove("active");
+    });
 
     const page =
         document.getElementById(id);
@@ -1281,22 +1150,28 @@ function showPage(id){
 function updateOwnerUI(){
 
     document.querySelectorAll(".owner-only")
-        .forEach(el => {
+    .forEach(el => {
 
-            el.style.display =
-                isOwner ? "flex" : "none";
+        el.style.display =
+            isOwner ? "flex" : "none";
 
-        });
+    });
 
+    const logoutNav =
+        document.getElementById("logoutNav");
 
-    document.getElementById("logoutNav")
-        .style.display =
-        isOwner ? "block" : "none";
+    const loginNav =
+        document.getElementById("loginNav");
 
+    if(logoutNav){
+        logoutNav.style.display =
+            isOwner ? "block" : "none";
+    }
 
-    document.getElementById("loginNav")
-        .style.display =
-        isOwner ? "none" : "block";
+    if(loginNav){
+        loginNav.style.display =
+            isOwner ? "none" : "block";
+    }
 }
 
 
@@ -1307,19 +1182,15 @@ function updateOwnerUI(){
 function ownerLogin(){
 
     const email =
-        document
-        .getElementById("ownerEmail")
-        .value
-        .trim();
+        document.getElementById("ownerEmail")
+        .value.trim();
 
     const password =
-        document
-        .getElementById("ownerPassword")
+        document.getElementById("ownerPassword")
         .value;
 
     const message =
         document.getElementById("loginMessage");
-
 
     if(!email || !password){
 
@@ -1331,7 +1202,6 @@ function ownerLogin(){
 
         return;
     }
-
 
     if(
         email === OWNER_EMAIL &&
@@ -1345,25 +1215,16 @@ function ownerLogin(){
             "true"
         );
 
-
         message.style.color =
             "#62e6b0";
 
         message.textContent =
             "Login successful.";
 
-
         updateOwnerUI();
-
-
-        /*
-           Reload media so owner controls
-           appear immediately after login.
-        */
 
         loadAllMedia();
         loadProfile();
-
 
         setTimeout(() => {
             showPage("home");
@@ -1376,7 +1237,6 @@ function ownerLogin(){
 
         message.textContent =
             "Invalid owner email or password.";
-
     }
 }
 
@@ -1407,22 +1267,21 @@ function editText(id,message){
 
     if(!isOwner){
 
-        alert("Owner login required.");
+        alert(
+            "Owner login required."
+        );
 
         return;
     }
 
-
     const element =
         document.getElementById(id);
-
 
     const newText =
         prompt(
             message,
             element.textContent.trim()
         );
-
 
     if(
         newText !== null &&
@@ -1431,7 +1290,6 @@ function editText(id,message){
 
         element.textContent =
             newText.trim();
-
 
         localStorage.setItem(
             id,
@@ -1446,18 +1304,18 @@ function editText(id,message){
 ===================================================== */
 
 [
-    "communicationTitle",
-    "communicationDescription",
-    "podcastTitle",
-    "podcastDescription",
-    "listeningTitle",
-    "listeningDescription",
-    "groupTitle",
-    "groupDescription",
-    "resumeTitle",
-    "resumeDescription",
-    "mockTitle",
-    "mockDescription"
+"communicationTitle",
+"communicationDescription",
+"podcastTitle",
+"podcastDescription",
+"listeningTitle",
+"listeningDescription",
+"groupTitle",
+"groupDescription",
+"resumeTitle",
+"resumeDescription",
+"mockTitle",
+"mockDescription"
 
 ].forEach(id => {
 
@@ -1474,83 +1332,44 @@ function editText(id,message){
                 saved;
         }
     }
-
 });
 
 
 /* =====================================================
-   INDEXED DB
+   GET MEDIA
 ===================================================== */
 
-let db;
+async function getMedia(key){
 
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+        .from("portfolio_media")
+        .select("*")
+        .eq("media_key",key)
+        .maybeSingle();
 
-/*
-   Version 2 is used for the corrected
-   upload structure.
+    if(error){
 
-   Existing data is NOT deleted.
-*/
+        console.error(
+            "Database read error:",
+            error
+        );
 
-const request =
-    indexedDB.open(
-        "KaviyaPortfolioDB",
-        2
-    );
-
-
-request.onupgradeneeded =
-function(event){
-
-    db =
-        event.target.result;
-
-
-    if(
-        !db.objectStoreNames
-        .contains("media")
-    ){
-
-        db.createObjectStore("media");
-
+        return null;
     }
-};
 
-
-request.onsuccess =
-function(event){
-
-    db =
-        event.target.result;
-
-
-    loadAllMedia();
-
-    loadProfile();
-
-    updateOwnerUI();
-
-};
-
-
-request.onerror =
-function(){
-
-    console.log(
-        "IndexedDB could not be opened."
-    );
-
-    alert(
-        "Browser storage could not be opened."
-    );
-};
+    return data;
+}
 
 
 /* =====================================================
-   UPLOAD MEDIA
+   UPDATED VIDEO / IMAGE / PDF UPLOAD
 ===================================================== */
 
-function uploadMedia(event,key){
+async function uploadMedia(event,key){
 
     if(!isOwner){
 
@@ -1567,123 +1386,406 @@ function uploadMedia(event,key){
     const file =
         event.target.files[0];
 
-
     if(!file){
         return;
     }
 
 
-    if(!db){
+    console.log(
+        "Selected file:",
+        file.name
+    );
+
+    console.log(
+        "File type:",
+        file.type
+    );
+
+    console.log(
+        "File size:",
+        file.size
+    );
+
+
+    /* -----------------------------------------
+       File type check
+    ----------------------------------------- */
+
+    const isVideo =
+        file.type &&
+        file.type.startsWith("video/");
+
+    const isImage =
+        file.type &&
+        file.type.startsWith("image/");
+
+    const isPDF =
+        file.type === "application/pdf";
+
+
+    if(
+        !isVideo &&
+        !isImage &&
+        !isPDF
+    ){
 
         alert(
-            "Storage is not ready. Please wait a moment and try again."
+            "Invalid file.\n\n" +
+            "Please select a video, image or PDF."
         );
+
+        event.target.value = "";
 
         return;
     }
 
 
-    /*
-       Convert file to ArrayBuffer and store it
-       as a Blob. This makes video/image/PDF
-       handling more reliable in IndexedDB.
-    */
+    /* -----------------------------------------
+       File size check
+       Bucket limit = 50 MB
+    ----------------------------------------- */
 
-    const reader =
-        new FileReader();
+    const MAX_SIZE =
+        50 * 1024 * 1024;
 
 
-    reader.onload =
-    function(){
+    if(file.size > MAX_SIZE){
 
-        const blob =
-            new Blob(
-                [reader.result],
+        alert(
+            "File is too large.\n\n" +
+            "Maximum size is 50 MB.\n\n" +
+            "Please select a smaller video."
+        );
+
+        event.target.value = "";
+
+        return;
+    }
+
+
+    /* -----------------------------------------
+       Upload message
+    ----------------------------------------- */
+
+    const container =
+        document.getElementById(
+            key + "Media"
+        );
+
+
+    if(container){
+
+        container.innerHTML = `
+
+            <div style="
+                padding:20px;
+                text-align:center;
+                color:#64b5ff;
+                font-size:16px;
+            ">
+
+                ⏳ Uploading...
+
+                <br><br>
+
+                Please wait.
+                Do not close the page.
+
+            </div>
+        `;
+    }
+
+
+    try{
+
+        /* -----------------------------------------
+           Get previous file
+        ----------------------------------------- */
+
+        const oldMedia =
+            await getMedia(key);
+
+
+        /* -----------------------------------------
+           Extension
+        ----------------------------------------- */
+
+        let extension =
+            "file";
+
+
+        if(
+            file.name.includes(".")
+        ){
+
+            extension =
+                file.name
+                .split(".")
+                .pop()
+                .toLowerCase();
+        }
+
+
+        /* -----------------------------------------
+           Unique path
+        ----------------------------------------- */
+
+        const filePath =
+            key +
+            "/" +
+            Date.now() +
+            "_" +
+            Math.random()
+                .toString(36)
+                .substring(2,10) +
+            "." +
+            extension;
+
+
+        console.log(
+            "Uploading:",
+            filePath
+        );
+
+
+        /* -----------------------------------------
+           Supabase Storage Upload
+        ----------------------------------------- */
+
+        const {
+            data:uploadData,
+            error:uploadError
+        } =
+            await supabaseClient
+            .storage
+            .from(STORAGE_BUCKET)
+            .upload(
+                filePath,
+                file,
                 {
-                    type:
+                    cacheControl:"3600",
+
+                    contentType:
                         file.type ||
-                        "application/octet-stream"
+                        "application/octet-stream",
+
+                    upsert:false
                 }
             );
 
 
-        const data = {
+        /* -----------------------------------------
+           Storage error
+        ----------------------------------------- */
 
-            blob:blob,
+        if(uploadError){
 
-            type:
-                file.type ||
-                "application/octet-stream",
-
-            name:
-                file.name
-
-        };
-
-
-        const transaction =
-            db.transaction(
-                ["media"],
-                "readwrite"
+            console.error(
+                "SUPABASE STORAGE ERROR:",
+                uploadError
             );
 
 
-        const store =
-            transaction.objectStore(
-                "media"
-            );
-
-
-        const saveRequest =
-            store.put(
-                data,
-                key
-            );
-
-
-        saveRequest.onsuccess =
-        function(){
-
-            displayMedia(
-                key,
-                data
-            );
-
-
-            event.target.value =
-                "";
+            if(container){
+                container.innerHTML = "";
+            }
 
 
             alert(
-                "Upload successful!"
+                "❌ Upload failed!\n\n" +
+                uploadError.message
             );
 
-        };
+
+            event.target.value = "";
+
+            return;
+        }
 
 
-        saveRequest.onerror =
-        function(){
-
-            alert(
-                "Upload failed. Please try again."
-            );
-
-        };
-
-    };
-
-
-    reader.onerror =
-    function(){
-
-        alert(
-            "Could not read the selected file."
+        console.log(
+            "Storage upload successful:",
+            uploadData
         );
 
-    };
+
+        /* -----------------------------------------
+           Public URL
+        ----------------------------------------- */
+
+        const {
+            data:publicData
+        } =
+            supabaseClient
+            .storage
+            .from(STORAGE_BUCKET)
+            .getPublicUrl(
+                filePath
+            );
 
 
-    reader.readAsArrayBuffer(file);
+        const publicUrl =
+            publicData.publicUrl;
+
+
+        console.log(
+            "Public URL:",
+            publicUrl
+        );
+
+
+        /* -----------------------------------------
+           Save database
+        ----------------------------------------- */
+
+        const {
+            data:databaseData,
+            error:databaseError
+        } =
+            await supabaseClient
+            .from("portfolio_media")
+            .upsert(
+                {
+                    media_key:key,
+
+                    file_url:
+                        publicUrl,
+
+                    storage_path:
+                        filePath,
+
+                    file_name:
+                        file.name,
+
+                    file_type:
+                        file.type,
+
+                    updated_at:
+                        new Date()
+                        .toISOString()
+                },
+                {
+                    onConflict:
+                        "media_key"
+                }
+            )
+            .select();
+
+
+        /* -----------------------------------------
+           Database error
+        ----------------------------------------- */
+
+        if(databaseError){
+
+            console.error(
+                "DATABASE ERROR:",
+                databaseError
+            );
+
+
+            /* Remove uploaded file */
+
+            await supabaseClient
+                .storage
+                .from(STORAGE_BUCKET)
+                .remove([
+                    filePath
+                ]);
+
+
+            if(container){
+                container.innerHTML = "";
+            }
+
+
+            alert(
+                "❌ Database save failed!\n\n" +
+                databaseError.message
+            );
+
+
+            event.target.value = "";
+
+            return;
+        }
+
+
+        console.log(
+            "Database saved:",
+            databaseData
+        );
+
+
+        /* -----------------------------------------
+           Delete old file
+        ----------------------------------------- */
+
+        if(
+            oldMedia &&
+            oldMedia.storage_path &&
+            oldMedia.storage_path !== filePath
+        ){
+
+            const {
+                error:oldDeleteError
+            } =
+                await supabaseClient
+                .storage
+                .from(STORAGE_BUCKET)
+                .remove([
+                    oldMedia.storage_path
+                ]);
+
+
+            if(oldDeleteError){
+
+                console.warn(
+                    "Old file delete warning:",
+                    oldDeleteError
+                );
+            }
+        }
+
+
+        /* -----------------------------------------
+           Reload
+        ----------------------------------------- */
+
+        await loadAllMedia();
+
+
+        event.target.value = "";
+
+
+        alert(
+            "✅ Video uploaded successfully!\n\n" +
+            "The file is now saved online."
+        );
+
+
+    }
+    catch(error){
+
+        console.error(
+            "UPLOAD ERROR:",
+            error
+        );
+
+
+        if(container){
+            container.innerHTML = "";
+        }
+
+
+        alert(
+            "❌ Upload failed!\n\n" +
+            error.message
+        );
+
+
+        event.target.value = "";
+    }
 }
 
 
@@ -1691,7 +1793,7 @@ function uploadMedia(event,key){
    DISPLAY MEDIA
 ===================================================== */
 
-function displayMedia(key,data){
+function displayOnlineMedia(key,data){
 
     const container =
         document.getElementById(
@@ -1700,12 +1802,6 @@ function displayMedia(key,data){
 
 
     if(!container){
-
-        console.log(
-            "Container not found:",
-            key + "Media"
-        );
-
         return;
     }
 
@@ -1713,126 +1809,84 @@ function displayMedia(key,data){
     container.innerHTML = "";
 
 
-    if(!data){
-        return;
-    }
-
-
-    /*
-       New uploads use data.blob.
-
-       Old uploads may use data.file.
-       This keeps previous local uploads
-       working when possible.
-    */
-
-    let fileBlob =
-        data.blob || data.file;
-
-
-    if(!fileBlob){
-
-        console.log(
-            "No file data:",
-            key
-        );
+    if(
+        !data ||
+        !data.file_url
+    ){
 
         return;
     }
-
-
-    const url =
-        URL.createObjectURL(
-            fileBlob
-        );
 
 
     /* VIDEO */
 
     if(
-        data.type &&
-        data.type.startsWith("video/")
+        data.file_type &&
+        data.file_type.startsWith("video/")
     ){
 
         const video =
             document.createElement("video");
 
 
-        video.controls = true;
+        video.controls =
+            true;
+
 
         video.preload =
             "metadata";
 
-        video.src = url;
 
-        video.style.display =
-            "block";
+        video.playsInline =
+            true;
 
-        video.style.margin =
-            "0 auto";
 
-        video.style.width =
-            "100%";
+        video.src =
+            data.file_url;
 
-        video.style.maxWidth =
-            "700px";
 
-        video.style.maxHeight =
-            "400px";
+        video.setAttribute(
+            "controlsList",
+            "nodownload"
+        );
 
 
         container.appendChild(
             video
         );
-
     }
 
 
     /* IMAGE */
 
     else if(
-        data.type &&
-        data.type.startsWith("image/")
+        data.file_type &&
+        data.file_type.startsWith("image/")
     ){
 
         const img =
             document.createElement("img");
 
 
-        img.src = url;
+        img.src =
+            data.file_url;
+
 
         img.alt =
-            data.name ||
+            data.file_name ||
             "Uploaded Image";
-
-
-        img.style.display =
-            "block";
-
-        img.style.margin =
-            "0 auto";
-
-        img.style.maxWidth =
-            "100%";
-
-        img.style.maxHeight =
-            "450px";
-
-        img.style.borderRadius =
-            "12px";
 
 
         container.appendChild(
             img
         );
-
     }
 
 
     /* PDF */
 
     else if(
-        data.type ===
+        data.file_type ===
         "application/pdf"
     ){
 
@@ -1844,22 +1898,43 @@ function displayMedia(key,data){
             "pdf-box";
 
 
-        box.innerHTML =
+        const text =
+            document.createElement("div");
+
+
+        text.textContent =
             "📄 " +
-            (data.name ||
-            "Uploaded PDF") +
-            "<br><br>";
+            (
+                data.file_name ||
+                "Uploaded PDF"
+            );
+
+
+        box.appendChild(
+            text
+        );
+
+
+        box.appendChild(
+            document.createElement("br")
+        );
 
 
         const link =
             document.createElement("a");
 
 
-        link.href = url;
+        link.href =
+            data.file_url;
 
-        link.target = "_blank";
 
-        link.rel = "noopener";
+        link.target =
+            "_blank";
+
+
+        link.rel =
+            "noopener";
+
 
         link.textContent =
             "Open PDF";
@@ -1873,32 +1948,6 @@ function displayMedia(key,data){
         container.appendChild(
             box
         );
-
-    }
-
-
-    /* OTHER FILE */
-
-    else{
-
-        const message =
-            document.createElement("p");
-
-
-        message.textContent =
-            "Uploaded file: " +
-            (data.name ||
-            "File");
-
-
-        message.style.color =
-            "#72c4ff";
-
-
-        container.appendChild(
-            message
-        );
-
     }
 
 
@@ -1914,15 +1963,7 @@ function displayMedia(key,data){
             "controls";
 
 
-        controls.style.display =
-            "flex";
-
-
-        controls.style.justifyContent =
-            "center";
-
-
-        /* REPLACE */
+        /* Replace */
 
         const replaceLabel =
             document.createElement("label");
@@ -1949,8 +1990,8 @@ function displayMedia(key,data){
 
 
         if(
-            data.type &&
-            data.type.startsWith("video/")
+            data.file_type &&
+            data.file_type.startsWith("video/")
         ){
 
             replaceInput.accept =
@@ -1958,8 +1999,8 @@ function displayMedia(key,data){
 
         }
         else if(
-            data.type &&
-            data.type.startsWith("image/")
+            data.file_type &&
+            data.file_type.startsWith("image/")
         ){
 
             replaceInput.accept =
@@ -1970,19 +2011,17 @@ function displayMedia(key,data){
 
             replaceInput.accept =
                 ".pdf,application/pdf";
-
         }
 
 
         replaceInput.onchange =
-        function(event){
+            function(event){
 
-            uploadMedia(
-                event,
-                key
-            );
-
-        };
+                uploadMedia(
+                    event,
+                    key
+                );
+            };
 
 
         replaceLabel.appendChild(
@@ -1990,12 +2029,10 @@ function displayMedia(key,data){
         );
 
 
-        /* DELETE */
+        /* Delete */
 
         const deleteButton =
-            document.createElement(
-                "button"
-            );
+            document.createElement("button");
 
 
         deleteButton.className =
@@ -2007,11 +2044,10 @@ function displayMedia(key,data){
 
 
         deleteButton.onclick =
-        function(){
+            function(){
 
-            deleteMedia(key);
-
-        };
+                deleteMedia(key);
+            };
 
 
         controls.appendChild(
@@ -2027,7 +2063,6 @@ function displayMedia(key,data){
         container.appendChild(
             controls
         );
-
     }
 }
 
@@ -2036,7 +2071,7 @@ function displayMedia(key,data){
    DELETE MEDIA
 ===================================================== */
 
-function deleteMedia(key){
+async function deleteMedia(key){
 
     if(!isOwner){
 
@@ -2048,9 +2083,23 @@ function deleteMedia(key){
     }
 
 
+    const data =
+        await getMedia(key);
+
+
+    if(!data){
+
+        alert(
+            "No uploaded file found."
+        );
+
+        return;
+    }
+
+
     if(
         !confirm(
-            "Delete this file?"
+            "Delete this file permanently?"
         )
     ){
 
@@ -2058,50 +2107,75 @@ function deleteMedia(key){
     }
 
 
-    const transaction =
-        db.transaction(
-            ["media"],
-            "readwrite"
-        );
+    try{
+
+        if(data.storage_path){
+
+            const {
+                error:storageError
+            } =
+                await supabaseClient
+                .storage
+                .from(STORAGE_BUCKET)
+                .remove([
+                    data.storage_path
+                ]);
 
 
-    const store =
-        transaction.objectStore(
-            "media"
-        );
+            if(storageError){
+
+                alert(
+                    "Storage delete failed: " +
+                    storageError.message
+                );
+
+                return;
+            }
+        }
 
 
-    const request =
-        store.delete(key);
-
-
-    request.onsuccess =
-    function(){
-
-        const container =
-            document.getElementById(
-                key + "Media"
+        const {
+            error:databaseError
+        } =
+            await supabaseClient
+            .from("portfolio_media")
+            .delete()
+            .eq(
+                "media_key",
+                key
             );
 
 
-        if(container){
+        if(databaseError){
 
-            container.innerHTML =
-                "";
+            alert(
+                "Database delete failed: " +
+                databaseError.message
+            );
 
+            return;
         }
 
-    };
 
+        await loadAllMedia();
 
-    request.onerror =
-    function(){
 
         alert(
-            "Could not delete the file."
+            "File deleted permanently."
         );
 
-    };
+
+    }
+    catch(error){
+
+        console.error(error);
+
+
+        alert(
+            "Delete failed: " +
+            error.message
+        );
+    }
 }
 
 
@@ -2109,12 +2183,7 @@ function deleteMedia(key){
    LOAD ALL MEDIA
 ===================================================== */
 
-function loadAllMedia(){
-
-    if(!db){
-        return;
-    }
-
+async function loadAllMedia(){
 
     const keys = [
 
@@ -2129,56 +2198,62 @@ function loadAllMedia(){
     ];
 
 
-    keys.forEach(
-    function(key){
+    try{
 
-        const transaction =
-            db.transaction(
-                ["media"],
-                "readonly"
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+            .from("portfolio_media")
+            .select("*");
+
+
+        if(error){
+
+            console.error(
+                "Media loading error:",
+                error
             );
 
-
-        const store =
-            transaction.objectStore(
-                "media"
-            );
+            return;
+        }
 
 
-        const request =
-            store.get(key);
+        keys.forEach(key => {
 
-
-        request.onsuccess =
-        function(){
-
-            const data =
-                request.result;
-
-
-            if(data){
-
-                displayMedia(
-                    key,
-                    data
+            const container =
+                document.getElementById(
+                    key + "Media"
                 );
 
+
+            if(container){
+
+                container.innerHTML =
+                    "";
             }
 
-        };
+        });
 
 
-        request.onerror =
-        function(){
+        if(data){
 
-            console.log(
-                "Could not load:",
-                key
-            );
+            data.forEach(item => {
 
-        };
+                displayOnlineMedia(
+                    item.media_key,
+                    item
+                );
 
-    });
+            });
+        }
+
+    }
+    catch(error){
+
+        console.error(error);
+    }
 }
 
 
@@ -2186,13 +2261,15 @@ function loadAllMedia(){
    PROFILE PHOTO UPLOAD
 ===================================================== */
 
-function uploadProfile(event){
+async function uploadProfile(event){
 
     if(!isOwner){
 
         alert(
             "Owner login required."
         );
+
+        event.target.value = "";
 
         return;
     }
@@ -2207,85 +2284,182 @@ function uploadProfile(event){
     }
 
 
-    const reader =
-        new FileReader();
+    if(
+        !file.type.startsWith("image/")
+    ){
+
+        alert(
+            "Please select an image file."
+        );
+
+        event.target.value = "";
+
+        return;
+    }
 
 
-    reader.onload =
-    function(){
+    try{
 
-        const blob =
-            new Blob(
-                [reader.result],
+        const oldProfile =
+            await getMedia("profile");
+
+
+        const extension =
+            file.name.includes(".")
+            ? file.name
+                .split(".")
+                .pop()
+                .toLowerCase()
+            : "jpg";
+
+
+        const filePath =
+            "profile/" +
+            Date.now() +
+            "_" +
+            Math.random()
+                .toString(36)
+                .substring(2,8) +
+            "." +
+            extension;
+
+
+        const {
+            error:uploadError
+        } =
+            await supabaseClient
+            .storage
+            .from(STORAGE_BUCKET)
+            .upload(
+                filePath,
+                file,
                 {
-                    type:
-                        file.type ||
-                        "image/*"
+                    upsert:false,
+                    contentType:file.type
                 }
             );
 
 
-        const data = {
+        if(uploadError){
 
-            blob:blob,
+            alert(
+                "Profile upload failed: " +
+                uploadError.message
+            );
 
-            type:
-                file.type ||
-                "image/*",
+            event.target.value = "";
 
-            name:
-                file.name
-
-        };
+            return;
+        }
 
 
-        const transaction =
-            db.transaction(
-                ["media"],
-                "readwrite"
+        const {
+            data:urlData
+        } =
+            supabaseClient
+            .storage
+            .from(STORAGE_BUCKET)
+            .getPublicUrl(
+                filePath
             );
 
 
-        const store =
-            transaction.objectStore(
-                "media"
+        const {
+            error:databaseError
+        } =
+            await supabaseClient
+            .from("portfolio_media")
+            .upsert(
+                {
+                    media_key:"profile",
+
+                    file_url:
+                        urlData.publicUrl,
+
+                    storage_path:
+                        filePath,
+
+                    file_name:
+                        file.name,
+
+                    file_type:
+                        file.type,
+
+                    updated_at:
+                        new Date()
+                        .toISOString()
+                },
+                {
+                    onConflict:
+                        "media_key"
+                }
             );
 
 
-        const request =
-            store.put(
-                data,
-                "profile"
-            );
+        if(databaseError){
 
-
-        request.onsuccess =
-        function(){
-
-            document.getElementById(
-                "profileImage"
-            ).src =
-                URL.createObjectURL(
-                    blob
-                );
-
-
-            event.target.value =
-                "";
+            await supabaseClient
+                .storage
+                .from(STORAGE_BUCKET)
+                .remove([
+                    filePath
+                ]);
 
 
             alert(
-                "Profile photo updated."
+                "Profile database save failed: " +
+                databaseError.message
             );
 
-        };
+            event.target.value = "";
 
-    };
+            return;
+        }
 
 
-    reader.readAsArrayBuffer(
-        file
-    );
+        if(
+            oldProfile &&
+            oldProfile.storage_path &&
+            oldProfile.storage_path !== filePath
+        ){
+
+            await supabaseClient
+                .storage
+                .from(STORAGE_BUCKET)
+                .remove([
+                    oldProfile.storage_path
+                ]);
+        }
+
+
+        document.getElementById(
+            "profileImage"
+        ).src =
+            urlData.publicUrl;
+
+
+        event.target.value = "";
+
+
+        alert(
+            "Profile photo saved online."
+        );
+
+
+    }
+    catch(error){
+
+        console.error(error);
+
+
+        alert(
+            "Profile upload failed: " +
+            error.message
+        );
+
+
+        event.target.value = "";
+    }
 }
 
 
@@ -2293,58 +2467,33 @@ function uploadProfile(event){
    LOAD PROFILE
 ===================================================== */
 
-function loadProfile(){
+async function loadProfile(){
 
-    if(!db){
-        return;
-    }
+    try{
 
-
-    const transaction =
-        db.transaction(
-            ["media"],
-            "readonly"
-        );
+        const data =
+            await getMedia("profile");
 
 
-    const store =
-        transaction.objectStore(
-            "media"
-        );
+        if(
+            data &&
+            data.file_url
+        ){
 
-
-    const request =
-        store.get("profile");
-
-
-    request.onsuccess =
-    function(){
-
-        if(request.result){
-
-            const data =
-                request.result;
-
-
-            const fileBlob =
-                data.blob ||
-                data.file;
-
-
-            if(fileBlob){
-
-                document.getElementById(
-                    "profileImage"
-                ).src =
-                    URL.createObjectURL(
-                        fileBlob
-                    );
-
-            }
-
+            document.getElementById(
+                "profileImage"
+            ).src =
+                data.file_url;
         }
 
-    };
+    }
+    catch(error){
+
+        console.error(
+            "Profile loading error:",
+            error
+        );
+    }
 }
 
 
@@ -2352,7 +2501,7 @@ function loadProfile(){
    DELETE PROFILE
 ===================================================== */
 
-function deleteProfile(){
+async function deleteProfile(){
 
     if(!isOwner){
 
@@ -2364,9 +2513,23 @@ function deleteProfile(){
     }
 
 
+    const data =
+        await getMedia("profile");
+
+
+    if(!data){
+
+        alert(
+            "No profile photo found."
+        );
+
+        return;
+    }
+
+
     if(
         !confirm(
-            "Delete profile photo?"
+            "Delete profile photo permanently?"
         )
     ){
 
@@ -2374,31 +2537,77 @@ function deleteProfile(){
     }
 
 
-    const transaction =
-        db.transaction(
-            ["media"],
-            "readwrite"
-        );
+    try{
+
+        if(data.storage_path){
+
+            const {
+                error:storageError
+            } =
+                await supabaseClient
+                .storage
+                .from(STORAGE_BUCKET)
+                .remove([
+                    data.storage_path
+                ]);
 
 
-    const request =
-        transaction.objectStore(
-            "media"
-        ).delete(
-            "profile"
-        );
+            if(storageError){
+
+                alert(
+                    "Delete failed: " +
+                    storageError.message
+                );
+
+                return;
+            }
+        }
 
 
-    request.onsuccess =
-    function(){
+        const {
+            error:databaseError
+        } =
+            await supabaseClient
+            .from("portfolio_media")
+            .delete()
+            .eq(
+                "media_key",
+                "profile"
+            );
+
+
+        if(databaseError){
+
+            alert(
+                "Database delete failed: " +
+                databaseError.message
+            );
+
+            return;
+        }
+
 
         document.getElementById(
             "profileImage"
-        ).removeAttribute(
-            "src"
+        ).removeAttribute("src");
+
+
+        alert(
+            "Profile photo deleted permanently."
         );
 
-    };
+
+    }
+    catch(error){
+
+        console.error(error);
+
+
+        alert(
+            "Delete failed: " +
+            error.message
+        );
+    }
 }
 
 
@@ -2408,8 +2617,11 @@ function deleteProfile(){
 
 updateOwnerUI();
 
+loadAllMedia();
+
+loadProfile();
+
 </script>
 
 </body>
 </html>
-
